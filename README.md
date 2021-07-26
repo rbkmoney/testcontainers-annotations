@@ -64,6 +64,41 @@ String[] properties() default {};
 
 `@WithPostgresqlSingletonSpringBootITest` — аналог `@WithPostgresqlSpringBootITest` только с `@PostgresqlTestcontainerSingleton`
 
+#### Примеры использования
+
+```java
+@PostgresqlTestcontainer
+@SpringBootTest
+public class AdjustmentDaoTest {
+
+    @Autowired
+    private AdjustmentDao adjustmentDao;
+
+  ...
+
+```
+```java
+@PostgresqlTestcontainerSingleton
+@DefaultSpringBootTest
+public class AdjustmentDaoTest {
+
+    @Autowired
+    private AdjustmentDao adjustmentDao;
+
+  ...
+
+```
+```java
+@WithPostgresqlSpringBootITest
+public class AdjustmentDaoTest {
+
+    @Autowired
+    private AdjustmentDao adjustmentDao;
+
+  ...
+
+```
+
 ### Ресерч
 ##### Было
 
