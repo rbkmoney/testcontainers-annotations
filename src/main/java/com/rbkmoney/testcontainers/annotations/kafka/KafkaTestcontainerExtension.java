@@ -83,6 +83,7 @@ public class KafkaTestcontainerExtension
                 container.stop();
             }
         }
+        THREAD_CONTAINER.remove();
     }
 
     private static Optional<KafkaTestcontainer> findCurrentAnnotation(Class<?> testClass) {
@@ -119,7 +120,10 @@ public class KafkaTestcontainerExtension
             var topicsResult = admin.createTopics(newTopics);
             // wait until everyone is created or timeout
             topicsResult.all().get(30, TimeUnit.SECONDS);
-        } catch (ExecutionException | InterruptedException | TimeoutException ex) {
+        } catch (ExecutionException | TimeoutException ex) {
+            throw new KafkaStartingException("Error when topic creating, ", ex);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
             throw new KafkaStartingException("Error when topic creating, ", ex);
         }
     }
@@ -137,8 +141,11 @@ public class KafkaTestcontainerExtension
                     .getStdout();
             assertThat(stdout)
                     .contains(topics);
-        } catch (IOException | InterruptedException ex) {
+        } catch (IOException ex) {
             throw new KafkaStartingException("Error when " + showCreatedTopics + ", ", ex);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            throw new KafkaStartingException("Error when topic creating, ", ex);
         }
     }
 

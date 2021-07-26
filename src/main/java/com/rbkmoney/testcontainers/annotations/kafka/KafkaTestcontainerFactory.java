@@ -40,11 +40,13 @@ public class KafkaTestcontainerFactory {
     }
 
     private KafkaContainer create() {
-        return new KafkaContainer(
+        try (KafkaContainer container = new KafkaContainer(
                 DockerImageName
                         .parse(KAFKA_IMAGE_NAME)
                         .withTag(loadTagFromSpringApplicationPropertiesFile(TAG_PROPERTY)))
-                .withEmbeddedZookeeper();
+                .withEmbeddedZookeeper()) {
+            return container;
+        }
     }
 
     private static class SingletonHolder {

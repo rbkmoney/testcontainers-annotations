@@ -38,10 +38,12 @@ public class PostgresqlTestcontainerFactory {
     }
 
     private PostgreSQLContainer<?> create() {
-        return new PostgreSQLContainer<>(
+        try (PostgreSQLContainer<?> container = new PostgreSQLContainer<>(
                 DockerImageName
                         .parse(POSTGRESQL_IMAGE_NAME)
-                        .withTag(loadTagFromSpringApplicationPropertiesFile(TAG_PROPERTY)));
+                        .withTag(loadTagFromSpringApplicationPropertiesFile(TAG_PROPERTY)))) {
+            return container;
+        }
     }
 
     private static class SingletonHolder {

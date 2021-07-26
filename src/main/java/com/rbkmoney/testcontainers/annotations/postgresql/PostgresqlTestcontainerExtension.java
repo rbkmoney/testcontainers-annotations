@@ -71,6 +71,7 @@ public class PostgresqlTestcontainerExtension
                 container.stop();
             }
         }
+        THREAD_CONTAINER.remove();
     }
 
     private static Optional<PostgresqlTestcontainer> findCurrentAnnotation(Class<?> testClass) {
