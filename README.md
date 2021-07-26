@@ -58,11 +58,9 @@ String[] properties() default {};
 
 #### Дополнительные обертки
 
-`@PostgresqlTestcontainerSingleton` — `@PostgresqlTestcontainer` в режиме `InstanceMode.SINGLETON`
-
-`@WithPostgresqlSpringBootITest` — обертка для запуска спрингового теста с использованием тестконтейнера с базой. На борту — `@PostgresqlTestcontainer` и `@DefaultSpringBootTest` (представляет из себя дефолтную обертку над `SpringBootTest` типичную для домена [rbkmoney](https://github.com/rbkmoney))
-
-`@WithPostgresqlSingletonSpringBootITest` — аналог `@WithPostgresqlSpringBootITest` только с `@PostgresqlTestcontainerSingleton`
+`@PostgresqlTestcontainerSingleton` — `@PostgresqlTestcontainer` в режиме `InstanceMode.SINGLETON`  
+`@WithPostgresqlSpringBootITest` — обертка для запуска спрингового теста с использованием тестконтейнера с базой. На борту — `@PostgresqlTestcontainer` и `@DefaultSpringBootTest` (представляет из себя дефолтную обертку над `SpringBootTest` типичную для домена [rbkmoney](https://github.com/rbkmoney))  
+`@WithPostgresqlSingletonSpringBootITest` — аналог `@WithPostgresqlSpringBootITest` только с `@PostgresqlTestcontainerSingleton`  
 
 #### Примеры использования
 
@@ -101,7 +99,7 @@ public class AdjustmentDaoTest {
 
 ### `@KafkaTestcontainer`
 
-При ее использовании будет поднять тестконтейнер с кафкой + настройки контейнера будут проинициализированы в контекст тестового приложения
+При ее использовании будет поднять тестконтейнер с кафкой + настройки контейнера будут проинициализированы в контекст тестового приложения  
 Аннотация требует дополнительной конфигурации (см. ниже)
 
 #### Параметры аннотации
