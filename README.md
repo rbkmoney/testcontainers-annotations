@@ -26,7 +26,7 @@
 @KafkaTestcontainer
 ```
 
-также, для изменения тега образа докера, который используется [TestContainers](https://github.com/testcontainers/testcontainers-java) нужно переопределить параметры в `application.yml`:
+Также, для изменения тега образа докера, который используется [TestContainers](https://github.com/testcontainers/testcontainers-java) нужно переопределить параметры в `application.yml`:
 
 ```yml
 testcontainers:
