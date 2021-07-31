@@ -5,6 +5,8 @@
 
 Аннотация не требует дополнительной конфигурации
 
+Пример использования — в [fraudbusters](https://github.com/rbkmoney/fraudbusters/pull/137)
+
 ## Параметры аннотации
 
 ```java
