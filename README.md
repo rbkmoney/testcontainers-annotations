@@ -50,8 +50,6 @@ testcontainers:
 
 Eсли параметр не указан библиотека будет использовать параметры по умолчанию, указанные в репозитории в файле [`testcontainers-annotations.yml`](https://github.com/rbkmoney/testcontainers-annotations/blob/master/src/main/resources/testcontainers-annotations.yml)
 
-Инициализация настроек контейнеров в спринговый контекст тестового приложения реализован под капотом аннотаций
-
 <details>
   
 <summary>
