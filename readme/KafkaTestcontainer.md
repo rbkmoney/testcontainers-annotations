@@ -5,6 +5,10 @@
 
 Аннотация требует дополнительной конфигурации (см. ниже)
 
+Пример использования `@KafkaTestcontainer` с `KafkaProducer` — в [magista](https://github.com/rbkmoney/magista/blob/master/src/test/java/com/rbkmoney/magista/kafka/InvoicingListenerTest.java)
+
+Пример использования `@KafkaTestcontainer` с `KafkaConsumer` — в [sink-drinker](https://github.com/rbkmoney/sink-drinker/blob/master/src/test/java/com/rbkmoney/sinkdrinker/kafka/KafkaSenderTest.java)
+
 ## Параметры аннотации
 
 ```java
@@ -69,10 +73,6 @@ String[] topicsKeys();
 Пример использования `KafkaConsumer` — в [sink-drinker](https://github.com/rbkmoney/sink-drinker/blob/master/src/test/java/com/rbkmoney/sinkdrinker/kafka/KafkaSenderTest.java)
 
 #### Примеры использования
-
-Пример использования `@KafkaTestcontainer` с `KafkaProducer` — в [магисте](https://github.com/rbkmoney/magista/blob/master/src/test/java/com/rbkmoney/magista/kafka/InvoicingListenerTest.java)
-
-Пример использования `@KafkaTestcontainer` с `KafkaConsumer` — в [sink-drinker](https://github.com/rbkmoney/sink-drinker/blob/master/src/test/java/com/rbkmoney/sinkdrinker/kafka/KafkaSenderTest.java)
 
 ```java
 @Target({ElementType.TYPE})
