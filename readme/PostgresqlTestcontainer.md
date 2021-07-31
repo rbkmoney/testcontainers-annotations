@@ -5,6 +5,8 @@
 
 Аннотация не требует дополнительной конфигурации
 
+Пример использования — в [magista](https://github.com/rbkmoney/magista/tree/master/src/test/java/com/rbkmoney/magista/config)
+
 ## Параметры аннотации
 
 ```java
