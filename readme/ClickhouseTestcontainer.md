@@ -38,7 +38,7 @@ String[] migrations();
         migrations = {
                 "sql/db_init.sql",
                 "sql/V4__create_payment.sql"})
-@SpringBootTest // or @DefaultSpringBootTest
+@SpringBootTest
 public class AdjustmentDaoTest {
 
     @Autowired
