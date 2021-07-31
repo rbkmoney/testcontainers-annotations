@@ -34,7 +34,10 @@ String[] migrations();
 #### Примеры использования
 
 ```java
-@ClickhouseTestcontainer // or @ClickhouseTestcontainerSingleton
+@ClickhouseTestcontainer(
+        migrations = {
+                "sql/db_init.sql",
+                "sql/V4__create_payment.sql"})
 @SpringBootTest // or @DefaultSpringBootTest
 public class AdjustmentDaoTest {
 
@@ -49,7 +52,10 @@ public class AdjustmentDaoTest {
 
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@ClickhouseTestcontainer
+@ClickhouseTestcontainer(
+        migrations = {
+                "sql/db_init.sql",
+                "sql/V4__create_payment.sql"})
 @DefaultSpringBootTest
 public @interface ClickhouseSpringBootITest {
 }
