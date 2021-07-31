@@ -1,6 +1,6 @@
-# `@PostgresqlTestcontainer`
+# `@ClickhouseTestcontainer`
 
-Аннотация подключает и запускает тестконтейнер `PostgreSQLContainer` + настройки
+Аннотация подключает и запускает тестконтейнер `ClickHouseContainer` + настройки
 контейнера будут проинициализированы в контекст тестового приложения
 
 Аннотация не требует дополнительной конфигурации
@@ -13,9 +13,17 @@ String[] properties() default {};
 
 `properties()` аналогичный параметр как у аннотации `SpringBootTest`, например — `properties = {"kek=true"}`
 
-## `@PostgresqlTestcontainerSingleton`
+```java
+String[] migrations();
+```
 
-Аннотация является `@PostgresqlTestcontainer` [*в режиме синглтона*](https://ru.wikipedia.org/wiki/Одиночка_(шаблон_проектирования)) — создаваемый тестконтейнер `PostgreSQLContainer` будет создан *один раз* (в разрезе всего набора тестовых классов в пакете `test`) и будет переиспользоваться в каждом тестовом классе
+`migrations()` **обязательный** параметр — здесь указываются файлы с миграциями для кликхауза, например — `migrations = {"sql/drop_tables.sql","sql/db_init.sql",...}`
+
+Если контейнер переиспользуется в режиме синглтона первой миграцией есть смысл указывать дроп таблиц для изоляции состояний тестов. Для миграции схемы используется `ChInitializer.initAllScripts`, при ошибке процесса приложение не запустится
+
+## `@ClickhouseTestcontainerSingleton`
+
+Аннотация является `@ClickhouseTestcontainer` [*в режиме синглтона*](https://ru.wikipedia.org/wiki/Одиночка_(шаблон_проектирования)) — создаваемый тестконтейнер `ClickHouseContainer` будет создан *один раз* (в разрезе всего набора тестовых классов в пакете `test`) и будет переиспользоваться в каждом тестовом классе
 
 ###### Дополнительные обертки
 
@@ -24,7 +32,7 @@ String[] properties() default {};
 #### Примеры использования
 
 ```java
-@PostgresqlTestcontainer // or @PostgresqlTestcontainerSingleton
+@ClickhouseTestcontainer // or @ClickhouseTestcontainerSingleton
 @SpringBootTest // or @DefaultSpringBootTest
 public class AdjustmentDaoTest {
 
@@ -39,9 +47,14 @@ public class AdjustmentDaoTest {
 
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@PostgresqlTestcontainerSingleton
+@ClickhouseTestcontainer
 @DefaultSpringBootTest
-public @interface PostgresqlSpringBootITest {
+public @interface ClickhouseSpringBootITest {
 }
 
 ```
+
+Еще пример
+
+![image](https://user-images.githubusercontent.com/19729841/127735823-3add1f4c-ede0-4bee-b328-458eabaa22ac.png)
+
