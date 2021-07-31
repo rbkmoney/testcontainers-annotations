@@ -5,6 +5,8 @@
 
 Аннотация не требует дополнительной конфигурации
 
+Пример использования — в [file-storage](https://github.com/rbkmoney/file-storage/tree/master/src/test/java/com/rbkmoney/file/storage)
+
 ## Параметры аннотации
 
 ```java
