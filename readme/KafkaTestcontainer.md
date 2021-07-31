@@ -27,13 +27,52 @@ String[] topicsKeys();
 
 ###### Дополнительные обертки
 
-`@DefaultSpringBootTest` представляет из себя типичный для домена [rbkmoney](https://github.com/rbkmoney)) набор аннотаций используемых с `SpringBootTest` при тестированию спринговых приложений 
+`@DefaultSpringBootTest` представляет из себя типичный для домена [rbkmoney](https://github.com/rbkmoney) набор аннотаций используемых с `SpringBootTest` при тестированию спринговых приложений 
 
 `@KafkaProducerSpringBootTest`, `@KafkaConsumerSpringBootTest` набор аннотаций используемых с `SpringBootTest` при тестированию спринговых приложений c кафкой
 
+## Init `@ContextConfiguration`
+
 `KafkaConsumerConfig`, `KafkaProducerConfig` — кофиги для инциализации тестового консьюмера или продьюссера в зависимости от того, что проверяется в тесте
 
+При использовании `KafkaProducerConfig` в приложении можно использовать продьюссер для отправки данных в брокер
+
+```java
+
+    @Autowired
+    private KafkaProducer<TBase<?, ?>> testThriftKafkaProducer;
+    
+    ...
+    
+    testThriftKafkaProducer.send(invoicingTopicName, sinkEvent);
+    
+    ...
+```
+
+Пример использования `KafkaProducer` — в [магисте](https://github.com/rbkmoney/magista/blob/master/src/test/java/com/rbkmoney/magista/kafka/InvoicingListenerTest.java)
+
+При использовании `KafkaConsumerConfig` в приложении можно использовать консьюмер для получения данных из брокера
+
+```java
+
+    @Autowired
+    private KafkaConsumer<Event> testPayoutEventKafkaConsumer;
+    
+    ...
+    
+    testPayoutEventKafkaConsumer.read(topicName, data -> readEvents.add(data.value()));
+    Unreliables.retryUntilTrue(TIMEOUT, TimeUnit.SECONDS, () -> readEvents.size() == expected);
+    
+    ...
+```
+
+Пример использования `KafkaConsumer` — в [sink-drinker](https://github.com/rbkmoney/sink-drinker/blob/master/src/test/java/com/rbkmoney/sinkdrinker/kafka/KafkaSenderTest.java)
+
 #### Примеры использования
+
+Пример использования `@KafkaTestcontainer` с `KafkaProducer` — в [магисте](https://github.com/rbkmoney/magista/blob/master/src/test/java/com/rbkmoney/magista/kafka/InvoicingListenerTest.java)
+
+Пример использования `@KafkaTestcontainer` с `KafkaConsumer` — в [sink-drinker](https://github.com/rbkmoney/sink-drinker/blob/master/src/test/java/com/rbkmoney/sinkdrinker/kafka/KafkaSenderTest.java)
 
 ```java
 @Target({ElementType.TYPE})
@@ -68,3 +107,6 @@ public @interface ApplicationSpringBootITest {
 Создается обертка в виде аннотации, которая при использовании по очереди поднимает базу, кафку (нашу имплементированную
 аннотацию) и `SpringBootTest` для запуска спрингового контекста
 
+Еще пример использования 
+
+![image](https://user-images.githubusercontent.com/19729841/127735631-ef069f6c-9707-452e-ae03-a389d64adbbe.png)
