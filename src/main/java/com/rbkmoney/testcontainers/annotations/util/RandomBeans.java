@@ -6,10 +6,7 @@ import com.rbkmoney.geck.serializer.kit.tbase.TBaseHandler;
 import lombok.SneakyThrows;
 import lombok.var;
 import org.apache.thrift.TBase;
-import org.objenesis.Objenesis;
-import org.objenesis.ObjenesisStd;
 
-import java.lang.reflect.Constructor;
 import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,8 +15,6 @@ import java.util.stream.Stream;
 import static io.github.benas.randombeans.EnhancedRandomBuilder.aNewEnhancedRandom;
 
 public class RandomBeans {
-
-    private static final Objenesis objenesis = new ObjenesisStd();
 
     public static <T> T random(Class<T> type, String... excludedFields) {
         return aNewEnhancedRandom().nextObject(type, excludedFields);
@@ -39,7 +34,7 @@ public class RandomBeans {
         mockTBaseProcessor.addFieldHandler(
                 structHandler -> structHandler.value(Instant.now().toString()),
                 "created_at", "at", "due");
-        return mockTBaseProcessor.process(createNewInstance(type), new TBaseHandler<>(type));
+        return mockTBaseProcessor.process(type.getConstructor().newInstance(), new TBaseHandler<>(type));
     }
 
     @SneakyThrows
@@ -48,18 +43,6 @@ public class RandomBeans {
         mockTBaseProcessor.addFieldHandler(
                 structHandler -> structHandler.value(Instant.now().toString()),
                 "created_at", "at", "due");
-        return mockTBaseProcessor.process(createNewInstance(type), new TBaseHandler<>(type));
-    }
-
-    private static <T> T createNewInstance(Class<T> type) {
-        try {
-            Constructor<T> noArgConstructor = type.getDeclaredConstructor();
-            if (!noArgConstructor.isAccessible()) {
-                noArgConstructor.setAccessible(true);
-            }
-            return noArgConstructor.newInstance();
-        } catch (Exception exception) {
-            return objenesis.newInstance(type);
-        }
+        return mockTBaseProcessor.process(type.getConstructor().newInstance(), new TBaseHandler<>(type));
     }
 }
