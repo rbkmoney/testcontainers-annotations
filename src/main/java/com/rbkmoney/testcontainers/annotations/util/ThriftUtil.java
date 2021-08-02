@@ -19,21 +19,21 @@ import java.time.Instant;
 public class ThriftUtil {
 
     /**
-     * @deprecated will be removed in future. Use {@link RandomBeans#randomThrift(T, java.lang.Class)} instead
+     * @deprecated will be removed in future. Use {@link RandomBeans#randomThrift(java.lang.Class)} instead
      */
     @Deprecated
     @SneakyThrows
-    public static <T extends TBase<?, ?>> T fillThriftObject(T data, Class<T> type) {
+    public static <T extends TBase<?, ?>> T fillThriftObject(T thriftObject, Class<T> type) {
         var mockTBaseProcessor = new MockTBaseProcessor(MockMode.REQUIRED_ONLY, 25, 1);
         mockTBaseProcessor.addFieldHandler(
                 structHandler -> structHandler.value(Instant.now().toString()),
                 "created_at", "at", "due");
-        return mockTBaseProcessor.process(data, new TBaseHandler<>(type));
+        return mockTBaseProcessor.process(thriftObject, new TBaseHandler<>(type));
     }
 
     @SneakyThrows
-    public static <T extends TBase> JsonNode thriftBaseToJson(T thriftBase) {
-        return new TBaseProcessor().process(thriftBase, new JsonHandler());
+    public static <T extends TBase> JsonNode thriftBaseToJson(T thriftObject) {
+        return new TBaseProcessor().process(thriftObject, new JsonHandler());
     }
 
     @SneakyThrows
@@ -42,9 +42,9 @@ public class ThriftUtil {
     }
 
     @SneakyThrows
-    public static Value toByteArray(TBase<?, ?> data) {
+    public static Value toByteArray(TBase<?, ?> thriftObject) {
         return Value.bin(
                 new TSerializer(new TBinaryProtocol.Factory())
-                        .serialize(data));
+                        .serialize(thriftObject));
     }
 }
