@@ -27,7 +27,7 @@ import java.util.Optional;
  * инициализируются через {@link TestPropertyValues} и сливаются с текущим получаемым контекстом
  * приложения {@link ConfigurableApplicationContext}
  * <p>Инициализация кастомизированных фабрик с инициализацией настроек осуществляется через описание бинов
- * в файле {@link META-INF/spring.factories}</p>
+ * в файле META-INF/spring.factories
  *
  * @see PostgresqlTestcontainerFactory PostgresqlTestcontainerFactory
  * @see PostgresqlTestcontainerContextCustomizerFactory PostgresqlTestcontainerContextCustomizerFactory
