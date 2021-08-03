@@ -19,6 +19,7 @@ import org.testcontainers.containers.ClickHouseContainer;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -90,8 +91,9 @@ public class ClickhouseTestcontainerExtension implements BeforeAllCallback, Afte
 
     private void dropDatabase(ClickhouseTestcontainerSingleton annotation, ClickHouseContainer container) {
         try (Connection connection = ConnectionManager.getSystemConn(container)) {
-            connection.createStatement().execute(
-                    String.format("DROP DATABASE IF EXISTS %s", annotation.dbNameShouldBeDropped()));
+            try (Statement statement = connection.createStatement()) {
+                statement.execute(String.format("DROP DATABASE IF EXISTS %s", annotation.dbNameShouldBeDropped()));
+            }
             log.info(String.format("Successfully DROP DATABASE IF EXISTS %s", annotation.dbNameShouldBeDropped()));
         } catch (SQLException ex) {
             throw new ClickhouseStartingException(
