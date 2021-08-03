@@ -13,7 +13,8 @@ import java.lang.annotation.Target;
  * {@link org.testcontainers.containers.PostgreSQLContainer}, также
  * настройки контейнера будут проинициализированы в контекст тестового приложения
  * <p>Аннотация не требует дополнительной конфигурации
- * <p>Пример использования в коде — в <a href="https://github.com/rbkmoney/magista/tree/master/src/test/java/com/rbkmoney/magista/config">magista</a>
+ * <p>Пример использования в коде — в
+ * <a href="https://github.com/rbkmoney/magista/tree/master/src/test/java/com/rbkmoney/magista/config">magista</a>
  * <p><h3>Примеры</h3>
  * <p>В примере ниже {@code @PostgresqlTestcontainer} подключается напрямую
  * к {@code @SpringBootTest} для проведения теста DAO слоя, при котором идет запись и чтение данных из базы данных
@@ -27,12 +28,13 @@ import java.lang.annotation.Target;
  *
  *   ...
  * }}</pre>
- * <p>В примере ниже {@code @PostgresqlTestcontainer} подключается к {@link com.rbkmoney.testcontainers.annotations.DefaultSpringBootTest},
+ * <p>В примере ниже {@code @PostgresqlTestcontainer} подключается к
+ * {@link com.rbkmoney.testcontainers.annotations.DefaultSpringBootTest},
  * таким образом создается удобная обертка, которую можно использовать для набора тестов
  * <pre> {@code
  * @Target({ElementType.TYPE})
  * @Retention(RetentionPolicy.RUNTIME)
- * @PostgresqlTestcontainerSingleton
+ * @PostgresqlTestcontainer
  * @DefaultSpringBootTest
  * public @interface PostgresqlSpringBootITest {
  *
@@ -47,7 +49,8 @@ import java.lang.annotation.Target;
  * }
  * }</pre>
  *
- * @see PostgresqlTestcontainerSingleton
+ * @see PostgresqlTestcontainerSingleton @PostgresqlTestcontainerSingleton
+ * @see ExtendWith @ExtendWith
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
