@@ -39,7 +39,7 @@ public class KafkaTestcontainerExtension implements BeforeAllCallback, AfterAllC
             var container = KafkaTestcontainerFactory.container();
             GenericContainerUtil.startContainer(container);
             List<String> topics = loadTopics(findPrototypeAnnotation(context).get().topicsKeys()); //NOSONAR
-            createTopicsAndValidate(container, topics);
+            createTopics(container, topics);
             THREAD_CONTAINER.set(container);
         } else if (findSingletonAnnotation(context).isPresent()) {
             var container = KafkaTestcontainerFactory.singletonContainer();
@@ -49,7 +49,7 @@ public class KafkaTestcontainerExtension implements BeforeAllCallback, AfterAllC
             } else {
                 deleteTopics(container, topics);
             }
-            createTopicsAndValidate(container, topics);
+            createTopics(container, topics);
             THREAD_CONTAINER.set(container);
         }
     }
@@ -83,12 +83,6 @@ public class KafkaTestcontainerExtension implements BeforeAllCallback, AfterAllC
         return AnnotationSupport.findAnnotation(testClass, KafkaTestcontainerSingleton.class);
     }
 
-    private void createTopicsAndValidate(KafkaContainer container, List<String> topics) {
-        createTopics(container, topics);
-        assertThat(execInContainerKafkaTopicsListCommand(container))
-                .contains(topics);
-    }
-
     private List<String> loadTopics(String[] topicsKeys) {
         return loadFromSpringApplicationPropertiesFile(Arrays.asList(topicsKeys))
                 .values().stream()
@@ -109,6 +103,9 @@ public class KafkaTestcontainerExtension implements BeforeAllCallback, AfterAllC
             log.info("Topics list from 'AdminClient' after [TOPICS CREATED]: " + adminClientTopics);
             assertThat(adminClientTopics.size())
                     .isEqualTo(topics.size());
+            // make sure Zookeeper is ready before creating a new topic
+            assertThat(execInContainerKafkaTopicsListCommand(container))
+                    .contains(topics);
         } catch (ExecutionException | TimeoutException ex) {
             throw new KafkaStartingException("Error when topic creating, ", ex);
         } catch (InterruptedException ex) {
