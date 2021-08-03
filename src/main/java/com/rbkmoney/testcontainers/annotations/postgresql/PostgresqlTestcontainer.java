@@ -16,8 +16,8 @@ import java.lang.annotation.Target;
  * <p>Пример использования в коде — в
  * <a href="https://github.com/rbkmoney/magista/tree/master/src/test/java/com/rbkmoney/magista/config">magista</a>
  * <p><h3>Примеры</h3>
- * <p>В примере ниже {@code @PostgresqlTestcontainer} подключается напрямую
- * к {@code @SpringBootTest} для проведения теста DAO слоя, при котором идет запись и чтение данных из базы данных
+ * <p>В примере ниже {@link PostgresqlTestcontainer} подключается напрямую
+ * к {@link SpringBootTest} для проведения теста DAO слоя, при котором идет запись и чтение данных из базы данных
  * <pre> {@code
  * @PostgresqlTestcontainer // or @PostgresqlTestcontainerSingleton
  * @SpringBootTest // or @DefaultSpringBootTest
@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  *
  *   ...
  * }}</pre>
- * <p>В примере ниже {@code @PostgresqlTestcontainer} подключается к
+ * <p>В примере ниже {@link PostgresqlTestcontainer} подключается к
  * {@link com.rbkmoney.testcontainers.annotations.DefaultSpringBootTest},
  * таким образом создается удобная обертка, которую можно использовать для набора тестов
  * <pre> {@code
@@ -51,6 +51,7 @@ import java.lang.annotation.Target;
  *
  * @see PostgresqlTestcontainerSingleton @PostgresqlTestcontainerSingleton
  * @see ExtendWith @ExtendWith
+ * @see PostgresqlTestcontainerExtension PostgresqlTestcontainerExtension
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
