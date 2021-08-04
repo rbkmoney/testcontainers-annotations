@@ -29,8 +29,8 @@ import java.lang.annotation.Target;
  * <p>В примере ниже {@link PostgresqlTestcontainerSingleton} подключается напрямую
  * к {@link SpringBootTest} для проведения теста DAO слоя, при котором идет запись и чтение данных из базы данных
  * <pre> {@code
- * @PostgresqlTestcontainerSingleton // or @PostgresqlTestcontainer
- * @SpringBootTest // or @DefaultSpringBootTest
+ * @PostgresqlTestcontainerSingleton
+ * @SpringBootTest
  * public class AdjustmentDaoTest {
  *
  *     @Autowired
@@ -62,6 +62,7 @@ import java.lang.annotation.Target;
  * @see PostgresqlTestcontainer @PostgresqlTestcontainer
  * @see ExtendWith @ExtendWith
  * @see Transactional @Transactional
+ * @see org.testcontainers.containers.PostgreSQLContainer PostgreSQLContainer
  * @see com.rbkmoney.testcontainers.annotations.DefaultSpringBootTest @DefaultSpringBootTest
  */
 @Target({ElementType.TYPE})
