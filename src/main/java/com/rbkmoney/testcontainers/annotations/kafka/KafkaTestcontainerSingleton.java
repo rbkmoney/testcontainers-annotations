@@ -91,8 +91,7 @@ import java.lang.annotation.Target;
  *     @Autowired
  *     private KafkaProducer<TBase<?, ?>> testThriftKafkaProducer;
  *     ...
- * }
- * }</pre>
+ * }}</pre>
  *
  * @see KafkaTestcontainer @KafkaTestcontainer
  * @see ExtendWith @ExtendWith
@@ -119,6 +118,7 @@ public @interface KafkaTestcontainerSingleton {
      * Создание топиков происходит через {@link org.apache.kafka.clients.admin.AdminClient},
      * также есть дополнительная валидация результатов создания топиков,
      * без валидации приложение не запустится
+     * <p>
      * пример — topicsKeys = {"kafka.topics.invoicing.id",...}
      */
     String[] topicsKeys();

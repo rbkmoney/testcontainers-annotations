@@ -52,8 +52,7 @@ import java.lang.annotation.Target;
  *     @Autowired
  *     private AdjustmentDao adjustmentDao;
  *     ...
- * }
- * }</pre>
+ * }}</pre>
  *
  * @see ClickhouseTestcontainerSingleton @ClickhouseTestcontainerSingleton
  * @see ExtendWith @ExtendWith
@@ -75,6 +74,7 @@ public @interface ClickhouseTestcontainer {
 
     /**
      * Обязательный параметр — здесь указываются файлы с миграциями для кликхауза
+     * <p>
      * пример — migrations = {"sql/db_init.sql","sql/V1__create_payment.sql",...}
      */
     String[] migrations();

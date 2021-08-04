@@ -56,8 +56,7 @@ import java.lang.annotation.Target;
  *     @Autowired
  *     private AdjustmentDao adjustmentDao;
  *     ...
- * }
- * }</pre>
+ * }}</pre>
  *
  * @see PostgresqlTestcontainer @PostgresqlTestcontainer
  * @see ExtendWith @ExtendWith

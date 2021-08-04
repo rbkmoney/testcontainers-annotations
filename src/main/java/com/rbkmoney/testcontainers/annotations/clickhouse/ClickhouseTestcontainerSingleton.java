@@ -66,8 +66,7 @@ import java.lang.annotation.Target;
  *     @Autowired
  *     private AdjustmentDao adjustmentDao;
  *     ...
- * }
- * }</pre>
+ * }}</pre>
  *
  * @see ClickhouseTestcontainer @ClickhouseTestcontainer
  * @see ExtendWith @ExtendWith
@@ -88,6 +87,7 @@ public @interface ClickhouseTestcontainerSingleton {
 
     /**
      * Обязательный параметр — здесь указываются файлы с миграциями для кликхауза
+     * <p>
      * пример — migrations = {"sql/db_init.sql","sql/V1__create_payment.sql",...}
      */
     String[] migrations();
@@ -96,6 +96,7 @@ public @interface ClickhouseTestcontainerSingleton {
      * Обязательный параметр — здесь указывается имя базы данных, которая будет дропнута
      * при каждом запуске нового файла с тестами, таким образом обеспечивая изоляцию данных между тестами
      * и предоставляя каждый раз чистую базу
+     * <p>
      * пример — dbNameShouldBeDropped = "fraud"
      */
     String dbNameShouldBeDropped();
