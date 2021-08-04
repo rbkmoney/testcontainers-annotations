@@ -32,7 +32,7 @@ import static com.rbkmoney.testcontainers.annotations.util.SpringApplicationProp
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * {@code @KafkaTestcontainerExtension} инициализирует тестконтейнер из {@link KafkaTestcontainerFactory},
+ * {@code @KafkaTestcontainerExtension} инициализирует тестконтейнер из {@link KafkaTestcontainerExtension.KafkaTestcontainerContextCustomizerFactory},
  * настраивает, стартует, валидирует и останавливает
  * <p><h3>{@link KafkaTestcontainerExtension.KafkaTestcontainerContextCustomizerFactory}</h3>
  * <p>Инициализация настроек контейнеров в спринговый контекст тестового приложения реализован
