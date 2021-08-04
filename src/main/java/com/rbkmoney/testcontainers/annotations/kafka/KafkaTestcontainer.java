@@ -42,7 +42,7 @@ import java.lang.annotation.Target;
  * для проведения теста консьюмера, который читает данные из топика
  * <pre> {@code
  * @PostgresqlTestcontainer
- * @KafkaTestcontainerSingleton(
+ * @KafkaTestcontainer(
  *         properties = "kafka.topic.pm-events-payout.produce.enabled=true",
  *         topicsKeys = "kafka.topic.pm-events-payout.name")
  * @SpringBootTest

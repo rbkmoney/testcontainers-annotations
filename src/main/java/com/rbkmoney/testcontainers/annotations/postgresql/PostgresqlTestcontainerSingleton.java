@@ -14,6 +14,8 @@ import java.lang.annotation.Target;
  * {@link org.testcontainers.containers.PostgreSQLContainer}, также
  * настройки контейнера будут проинициализированы в контекст тестового приложения
  * <p>Аннотация не требует дополнительной конфигурации
+ * <p>Пример использования в коде — в
+ * <a href="https://github.com/rbkmoney/magista/tree/master/src/test/java/com/rbkmoney/magista/config">magista</a>
  * <p><h3>Синглтон</h3>
  * <p>Аннотация является {@link PostgresqlTestcontainer} в режиме
  * <a href="https://ru.wikipedia.org/wiki/Одиночка_(шаблон_проектирования)">синглтона</a> —
@@ -23,8 +25,6 @@ import java.lang.annotation.Target;
  * <p> Аннотация использует {@link Transactional} для изоляции тестовых данных
  * в разрезе каждого тестового метода. После каждого теста аннотация будет делать роллбек всех изменений,
  * таким образом, в каждом тесте база будет свежая и чистая
- * <p>Пример использования в коде — в
- * <a href="https://github.com/rbkmoney/magista/tree/master/src/test/java/com/rbkmoney/magista/config">magista</a>
  * <p><h3>Примеры</h3>
  * <p>В примере ниже {@link PostgresqlTestcontainerSingleton} подключается напрямую
  * к {@link SpringBootTest} для проведения теста DAO слоя, при котором идет запись и чтение данных из базы данных

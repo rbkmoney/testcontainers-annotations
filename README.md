@@ -49,21 +49,6 @@ testcontainers:
 Eсли параметр не указан библиотека будет использовать параметры по умолчанию, указанные в репозитории в файле [`testcontainers-annotations.yml`](https://github.com/rbkmoney/testcontainers-annotations/blob/master/src/main/resources/testcontainers-annotations.yml)
 
 <details>
-  
-<summary>
-  <a class="btnfire small stroke"><em class="fas fa-chevron-circle-down">Техническое описание инциализации настроек тестконтейнеров в контекст приложения</em>&nbsp;&nbsp;</a>    
-</summary>
-  
-<p>
-  
-Инициализация настроек контейнеров в спринговый контекст тестового приложения реализован под капотом аннотаций, на уровне реализации интерфейса `ContextCustomizerFactory` — информация о настройках используемого тестконтейнера и передаваемые через параметры аннотации настройки инициализируются через `TestPropertyValues` и сливаются с текущим получаемым контекстом приложения `ConfigurableApplicationContext`
-Инициализация кастомизированных фабрик с инициализацией настроек осуществляется через описание бинов в файле `spring.factories`
-  
-</p>
-  
-</details> 
-
-<details>
 
 <summary>
   <a class="btnfire small stroke"><em class="fas fa-chevron-circle-down">Ресерч</em>&nbsp;&nbsp;</a>    
